@@ -102,6 +102,7 @@ class SortingRobot:
             if self.can_move_right() == True:
                 self.move_right()
             
+            # If robot cannot move right (end of list) and swap WAS performed move to start of list and reset
             elif self.can_move_right() == False and self.light_is_on() == True:
                 self.swap_item()
                 while self.can_move_left() == True:
@@ -109,11 +110,13 @@ class SortingRobot:
                 self.set_light_off()
                 continue
             
+            # If end of list and no swap performed then place held item at end of list and end while loop
             else:
                 self.swap_item()
                 break
 
             if self.compare_item() == 1:
+                # Light is set on to commit to memory when a swap is performed
                 self.set_light_on()
                 self.swap_item()
                 self.move_left()
